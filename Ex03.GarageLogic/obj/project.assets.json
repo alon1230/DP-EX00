@@ -8,23 +8,23 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Alon Bar\\.nuget\\packages\\": {},
+    "C:\\Users\\alon.bar\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Studies\\Year III\\Semester A\\Design Patterns\\Exercises\\Solved\\Ex03.GarageLogic\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj",
+      "projectUniqueName": "C:\\Users\\alon.bar\\Source\\Repos\\DP-EX00\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj",
       "projectName": "Ex03.GarageLogic",
-      "projectPath": "C:\\Studies\\Year III\\Semester A\\Design Patterns\\Exercises\\Solved\\Ex03.GarageLogic\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj",
-      "packagesPath": "C:\\Users\\Alon Bar\\.nuget\\packages\\",
-      "outputPath": "C:\\Studies\\Year III\\Semester A\\Design Patterns\\Exercises\\Solved\\Ex03.GarageLogic\\Ex03.GarageLogic\\obj\\",
+      "projectPath": "C:\\Users\\alon.bar\\Source\\Repos\\DP-EX00\\Ex03.GarageLogic\\Ex03.GarageLogic.csproj",
+      "packagesPath": "C:\\Users\\alon.bar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alon.bar\\Source\\Repos\\DP-EX00\\Ex03.GarageLogic\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Alon Bar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alon.bar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -33,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://artifact02.solaredge.local/artifactory/api/nuget/automation-infra": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

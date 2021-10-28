@@ -8,12 +8,12 @@ namespace Ex03.GarageLogic
     {
        
 
-        string m_Phone { get; set; }
+        public string m_Phone { get; set; }
 
-        Garage.eStatus m_Status { get; set; } = Garage.eStatus.InFix;
-        Vehicle m_Vehicle { get; set; }
+        public Garage.eStatus m_Status { get; set; } = Garage.eStatus.InFix;
+        public Vehicle m_Vehicle { get; set; }
 
-        string m_Owner { get; set; }
+        public string m_Owner { get; set; }
         public GarageVehicle(string i_Owner, string i_Phone, Garage.eStatus i_Status, Vehicle i_Vehicle)
         {
             m_Owner = i_Owner;
