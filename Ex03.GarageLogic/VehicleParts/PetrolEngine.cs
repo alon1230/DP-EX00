@@ -25,8 +25,8 @@ namespace Ex03.GarageLogic
         }
         public override StringBuilder GetEngineDetails(string i_FormatString, StringBuilder io_stringBuilder)
         {
-            io_stringBuilder.AppendFormat(i_FormatString, "Fuel type:", m_FuelType);
-            io_stringBuilder.AppendFormat(i_FormatString, "Fuel left:", $"{m_EngineEnergyRemaining} hours out of {m_MaxEngineEnergy}");
+            io_stringBuilder.AppendFormat(i_FormatString, "Fuel type", m_FuelType);
+            io_stringBuilder.AppendFormat(i_FormatString, "Fuel left", $"{m_EngineEnergyRemaining} liters out of {m_MaxEngineEnergy}");
             return io_stringBuilder;
         }
     }

@@ -6,7 +6,7 @@ using static Ex03.GarageLogic.Interfaces.IPetrolUser;
 
 namespace Ex03.GarageLogic
 {
-    class PetrolCar : Car, IPetrolUser
+    public class PetrolCar : Car, IPetrolUser
     {
         const float k_TankSize = 45f;
         const eFuelType k_FuelType = eFuelType.Octan98;
@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic
             this.m_Engine = new PetrolEngine(k_FuelType, k_TankSize * (i_EnergyLevel / 100), k_TankSize);
             this.CreateTyreList(k_NumOfTyres, i_TyreManufacturer, i_AirPressure, k_MaxAirPressure);
         }
+        public PetrolCar() { }
 
         public void ChargeEngine(float i_Fuel, eFuelType i_FuelType, Action updateEnergylevel)
         {

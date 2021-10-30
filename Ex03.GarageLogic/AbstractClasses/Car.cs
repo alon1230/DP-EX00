@@ -16,8 +16,8 @@ namespace Ex03.GarageLogic
             black
         }
 
-        protected eColor m_Color;
-        protected int m_Doors;
+        public eColor m_Color { get; set; }
+        public int m_Doors { get; set; }
 
         protected Car(eColor i_Color,int i_Doors, string i_ModelName, string i_LicenseNumber, float i_EnergyLevel) : base(i_ModelName, i_LicenseNumber, i_EnergyLevel)
         {
@@ -27,7 +27,9 @@ namespace Ex03.GarageLogic
                 throw new ValueOutOfRangeException(2,5,$"Number of doors: {i_Doors} is not on the range of 2 to 5");
             }
             this.m_Doors = i_Doors;
+            
         }
+        protected Car() { }
         public override StringBuilder GetFullDetails(string i_FormatString, StringBuilder io_stringBuilder = null)
         {
             io_stringBuilder = base.GetFullDetails(i_FormatString, io_stringBuilder);

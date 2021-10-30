@@ -7,9 +7,9 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        public string m_ModelName { get; }
-        public string m_LicenseNumber { get; }
-        public float m_EnergyLevel;
+        public string m_ModelName { get; set; }
+        public string m_LicenseNumber { get; set; }
+        public float m_EnergyLevel { get; set; }
         public List<Tyre> m_Tyres { get; }
         public Engine m_Engine;
 
@@ -22,6 +22,7 @@ namespace Ex03.GarageLogic
             
             
         }
+        protected Vehicle() { }
         protected void CreateTyreList(int i_NumOfTyres,string i_TyreManufacturer, float i_AirPressure,float i_MaxAirPressure)
         {
             for(int i = 0; i < i_NumOfTyres; i++)
@@ -39,8 +40,8 @@ namespace Ex03.GarageLogic
             {
                 io_StringBuilder = new StringBuilder();
             }
-            io_StringBuilder.AppendFormat(i_FormatString, "License Number:", this.m_LicenseNumber);
-            io_StringBuilder.AppendFormat(i_FormatString, "Model Name:", this.m_ModelName);
+            io_StringBuilder.AppendFormat(i_FormatString, "License Number", this.m_LicenseNumber);
+            io_StringBuilder.AppendFormat(i_FormatString, "Model Name", this.m_ModelName);
             foreach (var tuple in this.m_Tyres.Select((tyre, i) => new { i, tyre }))
             {
                 io_StringBuilder.AppendFormat(i_FormatString, $"Tyre {tuple.i + 1} of manufacturer {tuple.tyre.m_Manufacturer} ", $"{tuple.tyre.m_AirPressure} PSI");

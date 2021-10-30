@@ -29,7 +29,7 @@ namespace Ex03.GarageLogic
         }
         public virtual StringBuilder GetEngineDetails(string i_FormatString, StringBuilder io_stringBuilder)
         {
-            io_stringBuilder.AppendFormat(i_FormatString, "Energy left:", $"{m_EngineEnergyRemaining} hours out of {m_MaxEngineEnergy}");
+            io_stringBuilder.AppendFormat(i_FormatString, "Energy left", $"{m_EngineEnergyRemaining} hours out of {m_MaxEngineEnergy}");
             return io_stringBuilder;
         }
     }

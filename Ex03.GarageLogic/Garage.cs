@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
 
     public static class Garage
     {
-        static Dictionary<string, GarageVehicle> m_StoredVehicle { get; } = new Dictionary<string, GarageVehicle>();
+        public static Dictionary<string, GarageVehicle> m_StoredVehicle { get; } = new Dictionary<string, GarageVehicle>();
         public enum eStatus
         {
             InFix,
@@ -17,19 +17,19 @@ namespace Ex03.GarageLogic
             Paid
         }
 
-        public static string AddVehicle(Vehicle i_Vehicle, string i_Onwer, string i_Phone)
+        public static string AddVehicle(GarageVehicle i_Vehicle)
         {
             string resMessage = "";
 
-            if (!m_StoredVehicle.ContainsKey(i_Vehicle.m_LicenseNumber))
+            if (!m_StoredVehicle.ContainsKey(i_Vehicle.m_Vehicle.m_LicenseNumber))
             {
 
-                m_StoredVehicle.Add(i_Vehicle.m_LicenseNumber, new GarageVehicle(i_Onwer, i_Phone, eStatus.InFix, i_Vehicle));
+                m_StoredVehicle[i_Vehicle.m_Vehicle.m_LicenseNumber] = i_Vehicle;
             }
             else
             {
-                resMessage = $"Vehice {i_Vehicle.m_LicenseNumber} already in the Garage! changing status to InFix";
-                m_StoredVehicle[i_Vehicle.m_LicenseNumber].m_Status = eStatus.InFix;
+                resMessage = $"Vehice {i_Vehicle.m_Vehicle.m_LicenseNumber} already in the Garage! changing status to InFix and dropping changes";
+                m_StoredVehicle[i_Vehicle.m_Vehicle.m_LicenseNumber].m_Status = eStatus.InFix;
 
             }
 
@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
             return resMessage;
 
         }
-        public static string PrintGatage(eStatus? i_Filter = null)
+        public static string PrintGarage(eStatus? i_Filter = null)
         {
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -52,10 +52,14 @@ namespace Ex03.GarageLogic
             {
                 relevantDict = m_StoredVehicle.Where(v => v.Value.m_Status == i_Filter).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             }
+            if (relevantDict.Count == 0)
+            {
+                stringBuilder.AppendLine("No vehicles match the provided filter");
+            }
 
             foreach (KeyValuePair<string, GarageVehicle> kvp in relevantDict)
             {
-                stringBuilder.AppendLine($"Vehicle {kvp.Key} status is '{kvp.Value.m_Status.ToString()}'");
+                stringBuilder.AppendLine($"Vehicle {kvp.Key} status is '{kvp.Value.m_Status}'");
             }
             return stringBuilder.ToString();
 
@@ -70,7 +74,8 @@ namespace Ex03.GarageLogic
             }
             catch (KeyNotFoundException)
             {
-                messege = $"Vehicle {i_LicenseNumber} was not found in the Garage. Do you wish to add it?";
+                messege = $"Vehicle {i_LicenseNumber} was not found in the Garage.";
+                throw new Exception(messege);
             }
             return messege;
         }
@@ -87,7 +92,8 @@ namespace Ex03.GarageLogic
             }
             catch (KeyNotFoundException)
             {
-                messege = $"Vehicle {i_LicenseNumber} was not found in the Garage. Do you wish to add it?";
+                messege = $"Vehicle {i_LicenseNumber} was not found in the Garage.";
+                throw new Exception(messege);
             }
             return messege;
         }
@@ -100,53 +106,64 @@ namespace Ex03.GarageLogic
                 Vehicle vehicle = m_StoredVehicle[i_LicenseNumber].m_Vehicle;
                 if (vehicle is Interfaces.IPetrolUser)
                 {
-                    (vehicle as Interfaces.IPetrolUser).ChargeEngine(i_Amount, i_FuelType,vehicle.UpdateEnergyLevel);
+                    (vehicle as Interfaces.IPetrolUser).ChargeEngine(i_Amount, i_FuelType, vehicle.UpdateEnergyLevel);
                 }
                 else
                 {
-                    message = $"Vehile {i_LicenseNumber} is not a Petrol vehicle!";
+
+                    throw new ArgumentException($"Vehile {i_LicenseNumber} is not a Petrol vehicle!");
                 }
 
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
-                message = e.Message + $" of Vehicle {i_LicenseNumber}";
+                throw new Exception(e.Message);
             }
             catch (KeyNotFoundException)
             {
-                message = $"Vehicle {i_LicenseNumber} was not found in the Garage. Do you wish to add it?";
+                message = $"Vehicle {i_LicenseNumber} was not found in the Garage.";
+                throw new Exception(message);
+
             }
             catch (ValueOutOfRangeException e)
             {
                 Vehicle vehicle = m_StoredVehicle[i_LicenseNumber].m_Vehicle; //if we got here there will be no KeyNotFoundException
                 message = $"Vehicle {i_LicenseNumber} have {vehicle.m_Engine.m_EngineEnergyRemaining} Fuel left in it. charging it with {i_Amount} of {i_FuelType} will exceed the max amout of {e.m_MaxValue}." +
                     $" please charge no more than {e.m_MaxValue - vehicle.m_Engine.m_EngineEnergyRemaining}";
+                throw new Exception(message);
             }
             return message;
         }
 
-                   
-        
-        public static string ChargeElectricVehicle(string i_LicenseNumber,float i_Amount)
+
+
+        public static string ChargeElectricVehicle(string i_LicenseNumber, float i_Amount)
         {
-            string message = $"ELectric vehicle {i_LicenseNumber} have been charged with {i_Amount} hours";
+            string message = $"ELectric vehicle {i_LicenseNumber} have been charged with {i_Amount} minuets";
             try
             {
                 Vehicle vehicle = m_StoredVehicle[i_LicenseNumber].m_Vehicle;
                 if (vehicle is Interfaces.IElectricUser)
                 {
-                    (vehicle as Interfaces.IElectricUser).ChargeEngine(i_Amount/60,vehicle.UpdateEnergyLevel);
+                    (vehicle as Interfaces.IElectricUser).ChargeEngine(i_Amount / 60, vehicle.UpdateEnergyLevel);
+                }
+                else
+                {
+
+                    throw new ArgumentException($"Vehile {i_LicenseNumber} is not a Electric vehicle!");
                 }
             }
             catch (KeyNotFoundException)
             {
-                message = $"Vehicle {i_LicenseNumber} was not found in the Garage. Do you wish to add it?";
+                message = $"Vehicle {i_LicenseNumber} was not found in the Garage.";
+                throw new Exception(message);
             }
             catch (ValueOutOfRangeException e)
             {
                 Vehicle vehicle = m_StoredVehicle[i_LicenseNumber].m_Vehicle; //if we got here there will be no KeyNotFoundException
                 message = $"Vehicle {i_LicenseNumber} have {vehicle.m_Engine.m_EngineEnergyRemaining} hours in it. charging it with {i_Amount} will exceed the max amout of {e.m_MaxValue}." +
-                    $" please charge no more than {(e.m_MaxValue - vehicle.m_Engine.m_EngineEnergyRemaining)*60} minuets";
+                    $" please charge no more than {(e.m_MaxValue - vehicle.m_Engine.m_EngineEnergyRemaining) * 60} minuets";
+                throw new Exception(message);
             }
 
             return message;
@@ -159,16 +176,19 @@ namespace Ex03.GarageLogic
                 string formatString = "{0,-15}: {1,5}\n";
                 GarageVehicle vehicle = m_StoredVehicle[i_LicenseNumber];
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.AppendLine($"Details for Vehicle {i_LicenseNumber}");            
-                stringBuilder.AppendFormat(formatString, "Owner Name:", vehicle.m_Owner);
-                stringBuilder.AppendFormat(formatString, "Status:", vehicle.m_Status);              
+                stringBuilder.AppendLine($"Details for Vehicle {i_LicenseNumber}");
+                stringBuilder.AppendFormat(formatString, "Owner Name", vehicle.m_Owner);
+                stringBuilder.AppendFormat(formatString, "Status", vehicle.m_Status);
+                stringBuilder = vehicle.m_Vehicle.GetFullDetails(formatString, stringBuilder);
+                res = stringBuilder.ToString();
 
 
 
             }
             catch (KeyNotFoundException)
             {
-                res = $"Vehicle {i_LicenseNumber} was not found in the Garage. Do you wish to add it?";
+                res = $"Vehicle {i_LicenseNumber} was not found in the Garage.";
+                throw new Exception(res);
             }
             return res;
         }

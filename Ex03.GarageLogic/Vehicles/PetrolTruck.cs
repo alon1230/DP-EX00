@@ -6,15 +6,15 @@ using static Ex03.GarageLogic.Interfaces.IPetrolUser;
 
 namespace Ex03.GarageLogic
 {
-    class PetrolTruck : Vehicle, IPetrolUser
+   public class PetrolTruck : Vehicle, IPetrolUser
     {
         const float k_TankSize = 115f;
         const eFuelType k_FuelType = eFuelType.Octan96;
         protected const int k_NumOfTyres = 12;
         protected const float k_MaxAirPressure = 28f;
 
-        bool m_DangerousSubstances;
-        float m_MaxLoad;
+        public bool m_DangerousSubstances { get; set; }
+        public float m_MaxLoad { get; set; }
 
         public PetrolTruck(string i_ModelName, string i_LicenseNumber, float i_EnergyLevel, float i_MaxLoad, bool i_DangerousSubstances,
             float i_AirPressure, string i_TyreManufacturer = "") : base(i_ModelName, i_LicenseNumber, i_EnergyLevel)
@@ -23,7 +23,9 @@ namespace Ex03.GarageLogic
             this.m_MaxLoad = i_MaxLoad;
             this.m_Engine = new PetrolEngine(k_FuelType, k_TankSize * (i_EnergyLevel / 100), k_TankSize);
             this.CreateTyreList(k_NumOfTyres, i_TyreManufacturer, i_AirPressure, k_MaxAirPressure);
+            
         }
+        public PetrolTruck() { }
 
         public void ChargeEngine(float i_Fuel, eFuelType i_FuelType, Action updateEnergylevel)
         {

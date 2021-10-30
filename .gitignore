@@ -14,3 +14,6 @@
 *.targets
 
 /Ex03.GarageLogic/obj
+/GarageUI/obj/Debug/netcoreapp3.1/.NETCoreApp,Version=v3.1.AssemblyAttributes.cs
+/GarageUI/obj/Debug/netcoreapp3.1
+/GarageUI/bin/Debug/netcoreapp3.1

@@ -5,7 +5,7 @@ using Ex03.GarageLogic.Interfaces;
 
 namespace Ex03.GarageLogic
 {
-    class ECar : Car,IElectricUser
+    public class ECar : Car,IElectricUser
     {
         const float k_MaxEngineTime = 3.2f;
        
@@ -15,6 +15,7 @@ namespace Ex03.GarageLogic
             this.m_Engine = new Engine(k_MaxEngineTime * (i_EnergyLevel / 100), k_MaxEngineTime);
             this.CreateTyreList(k_NumOfTyres, i_TyreManufacturer, i_AirPressure, k_MaxAirPressure);
         }
+        public ECar() { }
 
         public void ChargeEngine(float i_Time, Action updateEnergylevel)
         {

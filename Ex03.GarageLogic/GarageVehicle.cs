@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class GarageVehicle
+    public class GarageVehicle
     {
        
 
@@ -21,6 +21,7 @@ namespace Ex03.GarageLogic
             m_Status = i_Status;
             m_Vehicle = i_Vehicle;
         }
+        public GarageVehicle() { }
 
 
 
