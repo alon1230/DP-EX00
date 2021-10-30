@@ -13,6 +13,6 @@ namespace Ex03.GarageLogic.Interfaces
             Octan95,
             Soler
         }
-        public void ChargeEngine(float i_Fuel,eFuelType i_FuelType);
+        public void ChargeEngine(float i_Fuel,eFuelType i_FuelType, Action updateEnergylever);
     }
 }

@@ -15,13 +15,19 @@ namespace Ex03.GarageLogic
         {
             this.m_FuelType = i_FuelType;
         }
-        public void ChargeEngine(float i_AddedEnergy,eFuelType i_FuelType)
+        public void ChargeEngine(float i_AddedEnergy,eFuelType i_FuelType, Action updateEnergylevel)
         {
             if (i_FuelType != m_FuelType)
             {
-                throw new ArgumentException(string.Format("Fuel Type: {0} is inconsistant with fuel type of the engine {1}", i_FuelType, m_FuelType));
+                throw new ArgumentException($"Fuel Type: {i_FuelType} is inconsistant with fuel type of the engine {m_FuelType}");
             }
-            ChargeEngine(i_AddedEnergy);
+            ChargeEngine(i_AddedEnergy, updateEnergylevel);
+        }
+        public override StringBuilder GetEngineDetails(string i_FormatString, StringBuilder io_stringBuilder)
+        {
+            io_stringBuilder.AppendFormat(i_FormatString, "Fuel type:", m_FuelType);
+            io_stringBuilder.AppendFormat(i_FormatString, "Fuel left:", $"{m_EngineEnergyRemaining} hours out of {m_MaxEngineEnergy}");
+            return io_stringBuilder;
         }
     }
     

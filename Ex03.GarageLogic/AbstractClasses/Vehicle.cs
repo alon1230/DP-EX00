@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        protected string m_ModelName;
+        public string m_ModelName { get; }
         public string m_LicenseNumber { get; }
-        protected float m_EnergyLevel;
-        protected List<Tyre> m_Tyres;
-        protected Engine m_Engine;
+        public float m_EnergyLevel;
+        public List<Tyre> m_Tyres { get; }
+        public Engine m_Engine;
 
         protected Vehicle(string i_ModelName, string i_LicenseNumber,float i_EnergyLevel)
         {
@@ -26,8 +29,26 @@ namespace Ex03.GarageLogic
                 this.m_Tyres.Add(new Tyre(i_TyreManufacturer, i_AirPressure, i_MaxAirPressure));
             }
         }
-        
-        
+        public void UpdateEnergyLevel()
+        {
+            m_EnergyLevel = m_Engine.m_EngineEnergyRemaining / m_Engine.m_MaxEngineEnergy;   
+        }
+        public virtual StringBuilder GetFullDetails(string i_FormatString, StringBuilder io_StringBuilder = null)
+        {
+            if(io_StringBuilder == null)
+            {
+                io_StringBuilder = new StringBuilder();
+            }
+            io_StringBuilder.AppendFormat(i_FormatString, "License Number:", this.m_LicenseNumber);
+            io_StringBuilder.AppendFormat(i_FormatString, "Model Name:", this.m_ModelName);
+            foreach (var tuple in this.m_Tyres.Select((tyre, i) => new { i, tyre }))
+            {
+                io_StringBuilder.AppendFormat(i_FormatString, $"Tyre {tuple.i + 1} of manufacturer {tuple.tyre.m_Manufacturer} ", $"{tuple.tyre.m_AirPressure} PSI");
+            }
+            m_Engine.GetEngineDetails(i_FormatString,io_StringBuilder);
+            return io_StringBuilder;
+        }
+       
     }
 }
     

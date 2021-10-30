@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ex03.GarageLogic
+namespace Ex03.GarageLogic.Interfaces
 {
-    interface IElectricUser
+    public interface IElectricUser
     {
-        public void ChargeEngine(float i_Time);
+        public void ChargeEngine(float i_Time, Action updateEnergylever);
     }
 }

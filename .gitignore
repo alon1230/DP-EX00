@@ -13,3 +13,4 @@
 *.props
 *.targets
 
+/Ex03.GarageLogic/obj

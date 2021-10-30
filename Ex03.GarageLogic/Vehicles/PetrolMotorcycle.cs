@@ -18,9 +18,9 @@ namespace Ex03.GarageLogic
             this.CreateTyreList(k_NumOfTyres, i_TyreManufacturer, i_AirPressure, k_MaxAirPressure);
             this.m_Engine = new PetrolEngine(k_FuelType, k_TankSize * (i_EnergyLevel / 100), k_TankSize);
         }
-        public void ChargeEngine(float i_Fuel,eFuelType i_FuelType)
+        public void ChargeEngine(float i_Fuel,eFuelType i_FuelType,Action updateEnergylevel)
         {
-            (this.m_Engine as PetrolEngine).ChargeEngine(i_Fuel, i_FuelType);
+            (this.m_Engine as PetrolEngine).ChargeEngine(i_Fuel, i_FuelType, updateEnergylevel);
 
         }
         

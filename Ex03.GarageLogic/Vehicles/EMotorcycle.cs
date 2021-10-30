@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Ex03.GarageLogic.Interfaces;
 namespace Ex03.GarageLogic
 {
     class EMotorcycle : Motorcycle, IElectricUser
@@ -17,9 +17,9 @@ namespace Ex03.GarageLogic
             this.CreateTyreList(k_NumOfTyres, i_TyreManufacturer, i_AirPressure, k_MaxAirPressure);
         }
 
-       public void ChargeEngine(float i_Time)
+       public void ChargeEngine(float i_Time, Action updateEnergylevel)
         {
-            this.m_Engine.ChargeEngine(i_Time);
+            this.m_Engine.ChargeEngine(i_Time, updateEnergylevel);
         }
 
 

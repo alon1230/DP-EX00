@@ -25,9 +25,17 @@ namespace Ex03.GarageLogic
             this.CreateTyreList(k_NumOfTyres, i_TyreManufacturer, i_AirPressure, k_MaxAirPressure);
         }
 
-        public void ChargeEngine(float i_Fuel, eFuelType i_FuelType)
+        public void ChargeEngine(float i_Fuel, eFuelType i_FuelType, Action updateEnergylevel)
         {
-            (this.m_Engine as PetrolEngine).ChargeEngine(i_Fuel, i_FuelType);
+            (this.m_Engine as PetrolEngine).ChargeEngine(i_Fuel, i_FuelType, updateEnergylevel);
+        }
+        public override StringBuilder GetFullDetails(string i_FormatString, StringBuilder io_stringBuilder = null)
+        {
+            io_stringBuilder = base.GetFullDetails(i_FormatString, io_stringBuilder);
+            io_stringBuilder.AppendFormat(i_FormatString, "Max load", m_MaxLoad);
+            io_stringBuilder.AppendFormat(i_FormatString, "Carry Dangerous Substances", m_DangerousSubstances);
+            return io_stringBuilder;
+
         }
     }
 }

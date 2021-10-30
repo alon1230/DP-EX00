@@ -6,9 +6,9 @@ namespace Ex03.GarageLogic
 {
     public class Tyre
     {
-        string m_Manufacturer;
-        float m_AirPressure;
-        float m_MaxAirPressure;
+        public string m_Manufacturer { get; }
+        public float m_AirPressure { get; set; }
+        public float m_MaxAirPressure{ get; }
 
         public Tyre(string i_Manufacturer, float i_AirPressure, float i_MaxAirPressure)
         {
@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ValueOutOfRangeException("Filling air exceeded max air pressure");
+                throw new ValueOutOfRangeException(0,m_MaxAirPressure,"Filling air exceeded max air pressure");
             }
 
         }

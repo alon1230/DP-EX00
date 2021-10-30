@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
             B2
 
         }
-        eLicenseType m_eLicenseType;
+        eLicenseType m_LicenseType;
         int m_EngineVol;
 
         protected Motorcycle(int i_EngineVol, eLicenseType i_licenseType, string i_ModelName, string i_LicenseNumber,
@@ -24,9 +24,15 @@ namespace Ex03.GarageLogic
         {
 
 
-            this.m_eLicenseType = i_licenseType;
+            this.m_LicenseType = i_licenseType;
             this.m_EngineVol = i_EngineVol;
         }
-
+        public override StringBuilder GetFullDetails(string i_FormatString, StringBuilder io_stringBuilder = null)
+        {
+            io_stringBuilder = base.GetFullDetails(i_FormatString, io_stringBuilder);
+            io_stringBuilder.AppendFormat(i_FormatString, "Licende Type", m_LicenseType);
+            io_stringBuilder.AppendFormat(i_FormatString, "Engine Volume", m_EngineVol);
+            return io_stringBuilder;
+        }
     }
 }

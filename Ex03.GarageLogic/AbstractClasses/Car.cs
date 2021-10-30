@@ -24,9 +24,17 @@ namespace Ex03.GarageLogic
             this.m_Color = i_Color;
             if (i_Doors<2 || i_Doors > 5)
             {
-                throw new ValueOutOfRangeException(string.Format("Number of doors: {0} is not on the range of 2 to 5",i_Doors));
+                throw new ValueOutOfRangeException(2,5,$"Number of doors: {i_Doors} is not on the range of 2 to 5");
             }
             this.m_Doors = i_Doors;
+        }
+        public override StringBuilder GetFullDetails(string i_FormatString, StringBuilder io_stringBuilder = null)
+        {
+            io_stringBuilder = base.GetFullDetails(i_FormatString, io_stringBuilder);
+            io_stringBuilder.AppendFormat(i_FormatString, "Number of Doors", m_Doors);
+            io_stringBuilder.AppendFormat(i_FormatString, "color", m_Color);
+            return io_stringBuilder;
+
         }
     }
 }
